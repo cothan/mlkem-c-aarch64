@@ -15,13 +15,15 @@ CFLAGS_NISTRANDOMBYTES = ${CFLAGS} ${INCLUDE_NISTRANDOM}
 NISTFLAGS += -Wno-unused-result -O3 -fomit-frame-pointer
 RM = /bin/rm
 
-SOURCES = mlkem/kem.c mlkem/indcpa.c mlkem/polyvec.c mlkem/poly.c mlkem/ntt.c mlkem/cbd.c mlkem/reduce.c mlkem/verify.c
+ASM_CLEAN = mlkem/asm/clean/rej_uniform_asm.s
+
+SOURCES = $(ASM_CLEAN) mlkem/kem.c mlkem/indcpa.c mlkem/polyvec.c mlkem/poly.c mlkem/ntt.c mlkem/cbd.c mlkem/reduce.c mlkem/verify.c mlkem/rej_uniform.c
 SOURCESKECCAK = $(SOURCES) fips202/keccakf1600.c fips202/fips202.c mlkem/symmetric-shake.c
 SOURCESKECCAKRANDOM = $(SOURCESKECCAK) randombytes/randombytes.c
 SOURCESNISTKATS = $(SOURCESKECCAK) test/nistrng/aes.c test/nistrng/rng.c
 SOURCESBENCH = $(SOURCESKECCAKRANDOM) test/hal.c
 
-HEADERS = mlkem/params.h mlkem/kem.h mlkem/indcpa.h mlkem/polyvec.h mlkem/poly.h mlkem/ntt.h mlkem/cbd.h mlkem/reduce.h mlkem/verify.h mlkem/symmetric.h
+HEADERS = mlkem/params.h mlkem/kem.h mlkem/indcpa.h mlkem/polyvec.h mlkem/poly.h mlkem/ntt.h mlkem/cbd.h mlkem/reduce.c mlkem/verify.h mlkem/symmetric.h mlkem/rej_uniform.h
 HEADERSKECCAK = $(HEADERS) fips202/keccakf1600.h fips202/fips202.h
 HEADERSKECCAKRANDOM = $(HEADERSKECCAK) randombytes/randombytes.h
 HEADERNISTKATS = $(HEADERSKECCAK) test/nistrng/aes.h test/nistrng/randombytes.h
